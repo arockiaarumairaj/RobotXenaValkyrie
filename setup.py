@@ -24,8 +24,7 @@ install_requires = [r for r in required if r and r[0] != '#' and not r.startswit
 
 setup(
     name='robotxenavalkyrie',
-    version=robotxenavalkyrie.__version__,
-    url='https://github.com/xenadevel/PyRobotXenaValkyrie/',
+    url='https://github.com/arockiaarumairaj/RobotXenaValkyrie/',
     license='Apache Software License',
     author='arockia arumairaj',
     install_requires=install_requires,
