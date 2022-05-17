@@ -23,8 +23,8 @@ with open('requirements.txt') as f:
 install_requires = [r for r in required if r and r[0] != '#' and not r.startswith('git')]
 
 setup(
-    name='RobotXenaValkyrie',
-    version=RobotXenaValkyrie.__version__,
+    name='robotxenavalkyrie',
+    version=robotxenavalkyrie.__version__,
     url='https://github.com/xenadevel/PyRobotXenaValkyrie/',
     license='Apache Software License',
     author='arockia arumairaj',
