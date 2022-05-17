@@ -65,7 +65,8 @@ class XenaRobot():
         :param port: chassis port number
         :param password: chassis password
         """
-        self.xm.session.add_chassis(chassis, port, password)
+        self.xm.session.chassis = self.xm.session.add_chassis(chassis, port, password)
+        self.xm.session.chassis.reserve(force=True)
 
     def reserve_ports(self, *locations):
         """ Reserve ports only if ports are released.
@@ -164,6 +165,24 @@ class XenaRobot():
         """
         stats = _view_name_2_object[view.lower()](self.xm.session).read_stats()
         return {k.name: v for k, v in stats.items()}
+    
+    def disconnect(self, clear_streams=False, *ports):
+        '''
+        Releases ports , but can clear streams, shutdown xena.
+        :clear_streams -> bool that will clear streams on ValkyrieManager if set to True
+        :shutdown_xena -> bool that will shutdown xena if True
+        '''
+        if clear_streams:
+            for port_addr in ports:
+                module_n = int(port_addr[-3])
+                port_n = int(port_addr[-1])
+                self.ports[port_addr].load_config(f'xena/xpc_files/port-{module_n}-{port_n}.xpc')
+        self.xm.session.release_ports()
+        #if shutdown_xena:
+        #    self.xm.session.chassis.shutdown(restart=True)
+        #else:
+        self.xm.session.chassis.release()
+        self.xm.session.disconnect()
 
     #
     # Ports
