@@ -5,7 +5,7 @@ from __future__ import print_function
 from setuptools import setup, find_packages
 import io
 
-import RobotXenaValkyrie
+import xenaValkyrie
 
 
 def read(*filenames, **kwargs):
